@@ -46,4 +46,9 @@ def redirect_url(short_code):
     
     return redirect (long_url.long_url)
 
+@main.route('/history', methods=['GET'])
+def get_history():
+    urls = URL.query.order_by(URL.created_at.desc()).limit(5).all()  # Fetch last 5 URLs
+    return jsonify([{"long_url": url.long_url, "short_url": f"http://127.0.0.1:5000/s/{url.short_code}"} for url in urls])
+
 
