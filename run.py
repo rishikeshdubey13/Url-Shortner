@@ -1,5 +1,7 @@
 from app import create_app
+import logging
 
+logging.basicConfig(level=logging.DEBUG) 
 
 app = create_app()
 

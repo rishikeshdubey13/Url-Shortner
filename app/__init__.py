@@ -3,8 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from config import Config
 from flask_cors import CORS
 
-app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "*"}})
+
 
 
 db= SQLAlchemy()
@@ -12,6 +11,9 @@ db= SQLAlchemy()
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
+
+    CORS(app, resources={r"/*": {"origins": "*"}})  # Enable CORS inside the app
+
 
     db.init_app(app)
 
