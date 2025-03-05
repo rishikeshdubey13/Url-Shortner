@@ -2,6 +2,7 @@ from flask import Blueprint, redirect, jsonify, request
 from app import db
 from app.models import URL
 import random, string
+from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 
 main = Blueprint('main', __name__)
 
