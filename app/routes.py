@@ -2,8 +2,7 @@ from flask import Blueprint, redirect, jsonify, request
 from app import db
 from app.models import URL
 import random, string
-from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
-
+from flask_jwt_extended import jwt_required
 main = Blueprint('main', __name__)
 
 @main.route("/")
@@ -14,6 +13,7 @@ def generate_random_short_code():
     return ''.join(random.choices(string.ascii_letters + string.digits, k=7))
 
 @main.route('/shorten', methods = ['POST'])
+@jwt_required()
 def shorten_url():
     data = request.get_json()
     long_url = data.get('url')
